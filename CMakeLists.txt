@@ -20,9 +20,14 @@ set(ES_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 
 # ========== Source Files & Executable ==========
 
+# Qt Framework
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
+qt_standard_project_setup()
+
 # Main app source
 file(GLOB_RECURSE CPP_FILES ${ES_SOURCE_DIR}/*.cpp)
 set(SRC ${CPP_FILES})
 
 # Main app executable
-add_executable(${ES_TARGET_NAME} ${SRC})
+qt_add_executable(${ES_TARGET_NAME} ${SRC})
+target_link_libraries(${ES_TARGET_NAME} PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent)
